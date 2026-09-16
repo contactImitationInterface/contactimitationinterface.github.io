@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="CIMI: Contact Imitation Interface. Anonymous project page.">
+  <title>CIMI — Contact Imitation Interface</title>
+  <style>
+    :root { color-scheme: light; --ink: #142737; --muted: #596975; --accent: #155e87; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f8fafb; color: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { width: min(960px, 100%); margin: auto; padding: 64px 28px 40px; }
+    header { text-align: center; margin-bottom: 38px; }
+    .name { margin: 0 0 16px; color: var(--accent); font-size: 15px; font-weight: 750; letter-spacing: .22em; }
+    h1 { margin: 0; font-size: clamp(30px, 4.7vw, 46px); line-height: 1.14; letter-spacing: -.035em; }
+    .subtitle { max-width: 780px; margin: 20px auto; font-size: clamp(20px, 2.8vw, 27px); line-height: 1.4; }
+    .authors { margin: 24px 0 6px; font-size: 16px; font-weight: 650; }
+    .context { margin: 0; color: var(--muted); font-size: 14px; }
+    section { margin: 36px 0; }
+    h2 { margin: 0 0 18px; font-size: 23px; letter-spacing: -.02em; }
+    .abstract { padding: 30px; border: 1px solid #dce4e9; border-radius: 14px; background: white; }
+    .abstract p { margin: 0; color: #293e4c; font-size: 17px; line-height: 1.8; }
+    figure { margin: 40px auto; max-width: 740px; }
+    figure img { display: block; width: 100%; height: auto; border-radius: 8px; }
+    figcaption { margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.65; text-align: center; }
+    footer { border-top: 1px solid #dce4e9; padding-top: 22px; color: var(--muted); text-align: center; font-size: 13px; }
+    @media (max-width: 600px) { main { padding: 38px 18px; } .abstract { padding: 22px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="name">CIMI</p>
+      <h1>Contact Imitation Interface</h1>
+      <p class="subtitle">Transferring Dexterous Skills by Showing How Contact Unfolds</p>
+      <p class="authors">Anonymous Authors</p>
+      <p class="context">Anonymous project page</p>
+    </header>
+    <section class="abstract" aria-labelledby="abstract-heading">
+      <h2 id="abstract-heading">Abstract</h2>
+      <p>Robot-free human demonstrations offer a promising route to scaling dexterous manipulation data. The key challenge is to preserve the demonstrator's natural dexterity while producing contact-grounded observations and actions that transfer to robot hands. We present <strong>Contact Imitation Interface (CIMI)</strong>, a framework with contact-grounded demonstration and learning interfaces. The demonstration interface combines shared contact geometry and corresponding contact-camera observations with contact-alignment-first retargeting and context-view reprojection. The learning interface introduces a hierarchical policy in which a contact-surface planner predicts relative contact-surface motion and a controller coordinates wrist and finger commands to improve contact alignment. Together, these interfaces enable cross-embodiment transfer of contact-sensitive skills from human demonstrations to robot hands. We demonstrate CIMI on LEAP and Wuji hands through cube picking, coin picking, letter retrieval, and bulb installation, tasks requiring precise contact establishment and coordinated multi-finger motion. CIMI is low-cost and reproducible, and both its hardware and software will be open-sourced.</p>
+    </section>
+    <figure>
+      <img src="overview.png" alt="Shared fingertip contact modules on a human hand and LEAP and Wuji robot hands, with examples of letter retrieval, bulb installation, and cube picking.">
+      <figcaption>CIMI captures continuous fingertip contact perception for transferring diverse dexterous skills across robot hands.</figcaption>
+    </figure>
+    <footer>Contact Imitation Interface · Anonymous Authors</footer>
+  </main>
+</body>
+</html>
