@@ -5,48 +5,255 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <meta name="referrer" content="no-referrer">
-  <meta name="description" content="CIMI: Contact Imitation Interface. Anonymous project page.">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="CIMI transfers contact-sensitive dexterous skills from natural human demonstrations to different robot hands.">
+  <meta property="og:title" content="CIMI — Contact Imitation Interface">
+  <meta property="og:description" content="Transferring dexterous skills by showing how contact unfolds.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://contactimitationinterface.github.io/">
+  <meta property="og:image" content="https://contactimitationinterface.github.io/assets/teaser.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CIMI — Contact Imitation Interface">
+  <meta name="twitter:description" content="Transferring dexterous skills by showing how contact unfolds.">
+  <meta name="twitter:image" content="https://contactimitationinterface.github.io/assets/teaser.webp">
   <title>CIMI — Contact Imitation Interface</title>
-  <style>
-    :root { color-scheme: light; --ink: #142737; --muted: #596975; --accent: #155e87; }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: #f8fafb; color: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-    main { width: min(960px, 100%); margin: auto; padding: 64px 28px 40px; }
-    header { text-align: center; margin-bottom: 38px; }
-    .name { margin: 0 0 16px; color: var(--accent); font-size: 15px; font-weight: 750; letter-spacing: .22em; }
-    h1 { margin: 0; font-size: clamp(30px, 4.7vw, 46px); line-height: 1.14; letter-spacing: -.035em; }
-    .subtitle { max-width: 780px; margin: 20px auto; font-size: clamp(20px, 2.8vw, 27px); line-height: 1.4; }
-    .authors { margin: 24px 0 6px; font-size: 16px; font-weight: 650; }
-    .context { margin: 0; color: var(--muted); font-size: 14px; }
-    section { margin: 36px 0; }
-    h2 { margin: 0 0 18px; font-size: 23px; letter-spacing: -.02em; }
-    .abstract { padding: 30px; border: 1px solid #dce4e9; border-radius: 14px; background: white; }
-    .abstract p { margin: 0; color: #293e4c; font-size: 17px; line-height: 1.8; }
-    figure { margin: 40px auto; max-width: 740px; }
-    figure img { display: block; width: 100%; height: auto; border-radius: 8px; }
-    figcaption { margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.65; text-align: center; }
-    footer { border-top: 1px solid #dce4e9; padding-top: 22px; color: var(--muted); text-align: center; font-size: 13px; }
-    @media (max-width: 600px) { main { padding: 38px 18px; } .abstract { padding: 22px; } }
-  </style>
+  <link rel="preload" href="assets/fonts/amarna-400.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/amarna-700.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main>
-    <header>
-      <p class="name">CIMI</p>
-      <h1>Contact Imitation Interface</h1>
-      <p class="subtitle">Transferring Dexterous Skills by Showing How Contact Unfolds</p>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <aside class="contents" aria-label="Page contents">
+    <a class="contents__brand" href="#top" aria-label="CIMI, back to top">
+      <span class="contents__mark">C</span>
+      <span>CIMI</span>
+    </a>
+    <p class="contents__label">Contents</p>
+    <nav>
+      <a class="is-active" href="#overview">Overview</a>
+      <a href="#interface">The interface</a>
+      <a href="#transfer">Contact transfer</a>
+      <a href="#learning">Learning</a>
+      <a href="#results">Evaluation</a>
+      <a href="#efficiency">Collection</a>
+      <a href="#abstract">Abstract</a>
+    </nav>
+    <p class="contents__note">Anonymous project page<br>ICRA 2027 submission</p>
+  </aside>
+
+  <main id="content">
+    <header class="hero" id="top">
+      <p class="eyebrow">Contact-grounded robot learning</p>
+      <h1><span class="accent">CIMI:</span> Contact Imitation Interface</h1>
+      <p class="dek">Transferring Dexterous Skills by Showing How Contact Unfolds</p>
       <p class="authors">Anonymous Authors</p>
-      <p class="context">Anonymous project page</p>
+      <p class="venue">Anonymous project page · under review</p>
+
+      <div class="resource-row" aria-label="Project resources">
+        <span class="resource-pill"><span aria-hidden="true">↗</span> Paper · under review</span>
+        <span class="resource-pill"><span aria-hidden="true">⌘</span> Code · coming soon</span>
+        <a class="resource-pill resource-pill--link" href="#interface"><span aria-hidden="true">↓</span> Explore the method</a>
+      </div>
+
+      <div class="impact-strip" aria-label="Headline results">
+        <div><strong>80.8%</strong><span>mean final-stage success</span></div>
+        <div><strong>+50.0 pp</strong><span>over direct wrist–joint prediction</span></div>
+        <div><strong>2 hands</strong><span>LEAP and Wuji from shared demos</span></div>
+      </div>
     </header>
-    <section class="abstract" aria-labelledby="abstract-heading">
-      <h2 id="abstract-heading">Abstract</h2>
-      <p>Robot-free human demonstrations offer a promising route to scaling dexterous manipulation data. The key challenge is to preserve the demonstrator's natural dexterity while producing contact-grounded observations and actions that transfer to robot hands. We present <strong>Contact Imitation Interface (CIMI)</strong>, a framework with contact-grounded demonstration and learning interfaces. The demonstration interface combines shared contact geometry and corresponding contact-camera observations with contact-alignment-first retargeting and context-view reprojection. The learning interface introduces a hierarchical policy in which a contact-surface planner predicts relative contact-surface motion and a controller coordinates wrist and finger commands to improve contact alignment. Together, these interfaces enable cross-embodiment transfer of contact-sensitive skills from human demonstrations to robot hands. We demonstrate CIMI on LEAP and Wuji hands through cube picking, coin picking, letter retrieval, and bulb installation, tasks requiring precise contact establishment and coordinated multi-finger motion. CIMI is low-cost and reproducible, and both its hardware and software will be open-sourced.</p>
+
+    <section class="section section--first" id="overview" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <p class="section-kicker">The idea</p>
+        <h2 id="overview-title">Make contact the common language.</h2>
+        <p>Human and robot hands differ in kinematics, but they can share the geometry, viewpoint, and motion of the surfaces that touch the object.</p>
+      </div>
+      <figure class="hero-figure">
+        <img src="assets/teaser.webp" alt="CIMI transfers contact surfaces and observations from a human demonstration to LEAP and Wuji robot hands for letter retrieval, bulb installation, and cube picking." width="2300" height="1911">
+        <figcaption>Shared contact surfaces and observations connect natural human demonstrations to different robot hands and contact-sensitive skills.</figcaption>
+      </figure>
+      <div class="idea-grid" aria-label="CIMI design principles">
+        <article>
+          <span class="card-index">01</span>
+          <h3>Shared contact geometry</h3>
+          <p>Human and robot fingertip modules use matching surfaces and camera placement.</p>
+        </article>
+        <article>
+          <span class="card-index">02</span>
+          <h3>Contact-aligned transfer</h3>
+          <p>Retargeting prioritizes the contact motion, then corrects the wider camera views.</p>
+        </article>
+        <article>
+          <span class="card-index">03</span>
+          <h3>Contact-surface actions</h3>
+          <p>A planner predicts how surfaces should move; a controller coordinates wrist and fingers.</p>
+        </article>
+      </div>
     </section>
-    <figure>
-      <img src="overview.png" alt="Shared fingertip contact modules on a human hand and LEAP and Wuji robot hands, with examples of letter retrieval, bulb installation, and cube picking.">
-      <figcaption>CIMI captures continuous fingertip contact perception for transferring diverse dexterous skills across robot hands.</figcaption>
-    </figure>
-    <footer>Contact Imitation Interface · Anonymous Authors</footer>
+
+    <section class="section" id="interface" aria-labelledby="interface-title">
+      <div class="section-heading">
+        <p class="section-kicker">Contact-grounded interface</p>
+        <h2 id="interface-title">Capture what matters at the fingertip.</h2>
+        <p>Matching contact surfaces and cameras preserve local interaction cues while wider context views keep the whole task visible.</p>
+      </div>
+      <figure class="media-card media-card--wide">
+        <img src="assets/pipeline.webp" loading="lazy" alt="CIMI pipeline from the human demonstration interface through a contact-surface planner and controller to robot execution." width="2790" height="989">
+        <figcaption>Contact connects demonstration and learning: capture trajectories and observations, construct robot demonstrations, plan surface motion, and realize it through coordinated control.</figcaption>
+      </figure>
+      <div class="stage-grid">
+        <article><span>D1</span><h3>Capture</h3><p>Three fingertip contact cameras, four context views, and tracking views form nine synchronized streams at 10 Hz.</p></article>
+        <article><span>D2</span><h3>Track</h3><p>Printed fiducials and visual pose estimation recover the demonstrated contact-surface trajectories.</p></article>
+        <article><span>D3</span><h3>Retarget</h3><p>Wrist and finger motion are optimized together to align surface position and orientation.</p></article>
+        <article><span>D4</span><h3>Reproject</h3><p>Contact views are retained; wider views are transformed to match the robot’s retargeted viewpoint.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="transfer" aria-labelledby="transfer-title">
+      <div class="section-heading">
+        <p class="section-kicker">Contact transfer</p>
+        <h2 id="transfer-title">Align contact first. Repair viewpoint second.</h2>
+        <p>Fixing the wrist to match a context camera can leave fingertips misaligned. CIMI frees the wrist to reproduce contact, then reprojects scene observations to the robot cameras.</p>
+      </div>
+      <div class="figure-pair">
+        <figure class="media-card">
+          <p class="media-label">Retargeting priority</p>
+          <img src="assets/retargeting.webp" loading="lazy" alt="Comparison of context-alignment-first and contact-alignment-first retargeting." width="1556" height="894">
+          <figcaption>Contact alignment reduces fingertip mismatch even when the context-camera pose must change.</figcaption>
+        </figure>
+        <figure class="media-card">
+          <p class="media-label">View conversion</p>
+          <img src="assets/reprojection.webp" loading="lazy" alt="Context views are reprojected and overlaid with the retargeted robot geometry." width="1658" height="748">
+          <figcaption>Offline reprojection and robot-geometry overlay construct training views from the execution perspective.</figcaption>
+        </figure>
+      </div>
+      <div class="metric-callout">
+        <p><strong>0.51 mm</strong><span>coin contact-corner error</span></p>
+        <p><strong>1.09 mm</strong><span>bulb contact-corner error</span></p>
+        <p><strong>90%</strong><span>bulb lighting success after alignment</span></p>
+      </div>
+    </section>
+
+    <section class="section" id="learning" aria-labelledby="learning-title">
+      <div class="section-heading">
+        <p class="section-kicker">Contact-grounded learning</p>
+        <h2 id="learning-title">Plan in contact space. Control the whole hand.</h2>
+        <p>The learning interface separates what the fingertips should do from how a particular robot should move to do it.</p>
+      </div>
+      <div class="learning-flow" aria-label="CIMI learning interface flow">
+        <article>
+          <span class="flow-tag">Visual + proprioceptive observations</span>
+          <h3>Contact-surface planner</h3>
+          <p>A flow-matching policy predicts a 16-step relative trajectory for every controlled contact surface.</p>
+        </article>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <article>
+          <span class="flow-tag">Relative surface trajectories</span>
+          <h3>Contact-surface controller</h3>
+          <p>A reusable controller converts the plan into coordinated wrist poses and finger-joint targets.</p>
+        </article>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <article>
+          <span class="flow-tag">8-step execution prefix</span>
+          <h3>Replan from contact</h3>
+          <p>The policy executes half the chunk, observes the latest interaction, and plans again.</p>
+        </article>
+      </div>
+      <aside class="plain-callout">
+        <span>Why it matters</span>
+        <p>Direct wrist-and-joint prediction asks one visual policy to learn both contact intent and robot kinematics. CIMI makes contact motion explicit and lets a dedicated controller handle embodiment-specific coordination.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="results" aria-labelledby="results-title">
+      <div class="section-heading">
+        <p class="section-kicker">Real-world evaluation</p>
+        <h2 id="results-title">Contact grounding changes the outcome.</h2>
+        <p>Across six hand–task pairs and 20 rollouts per method, CIMI improves final-stage success on every task.</p>
+      </div>
+      <figure class="media-card media-card--wide">
+        <img src="assets/rollouts.webp" loading="lazy" alt="Successful CIMI rollouts for cube picking, coin picking, letter retrieval, and bulb installation, alongside baseline failures." width="1846" height="1294">
+        <figcaption>Successful rollouts reproduce the required contact sequence; context-only and direct-action baselines fail at alignment, wedging, engagement, or coordinated motion.</figcaption>
+      </figure>
+
+      <div class="result-layout">
+        <div class="comparison-card">
+          <div class="comparison-head"><h3>Mean final-stage success</h3><span>Six hand–task pairs</span></div>
+          <div class="bar-row">
+            <div class="bar-meta"><span>CIMI · ContactSurface + CTX+CC</span><strong>80.8%</strong></div>
+            <div class="bar-track"><span class="bar bar--ours" style="width:80.8%"></span></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-meta"><span>WristJoint + CTX+CC</span><strong>30.8%</strong></div>
+            <div class="bar-track"><span class="bar bar--baseline" style="width:30.8%"></span></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-meta"><span>ContactSurface + CTX</span><strong>1.7%</strong></div>
+            <div class="bar-track"><span class="bar bar--context" style="width:1.7%"></span></div>
+          </div>
+        </div>
+        <div class="key-observations">
+          <article><span>O1</span><h3>Shared demos cross hands</h3><p>The same cube and coin recordings train separate policies for LEAP and Wuji.</p></article>
+          <article><span>O2</span><h3>Local vision establishes contact</h3><p>Adding contact cameras raises CIMI from 1.7% to 80.8% mean success.</p></article>
+          <article><span>O3</span><h3>Contact actions coordinate motion</h3><p>Surface planning adds 50.0 percentage points over direct wrist–joint prediction.</p></article>
+        </div>
+      </div>
+
+      <div class="task-results" aria-label="CIMI final-stage success by hand and task">
+        <div class="task-result"><span>LEAP</span><strong>Cube</strong><em>75%</em></div>
+        <div class="task-result"><span>LEAP</span><strong>Coin</strong><em>85%</em></div>
+        <div class="task-result"><span>LEAP</span><strong>Letter</strong><em>80%</em></div>
+        <div class="task-result"><span>LEAP</span><strong>Bulb</strong><em>90%</em></div>
+        <div class="task-result task-result--wuji"><span>Wuji</span><strong>Cube</strong><em>70%</em></div>
+        <div class="task-result task-result--wuji"><span>Wuji</span><strong>Coin</strong><em>85%</em></div>
+      </div>
+    </section>
+
+    <section class="section" id="efficiency" aria-labelledby="efficiency-title">
+      <div class="section-heading">
+        <p class="section-kicker">Collection efficiency</p>
+        <h2 id="efficiency-title">Natural to demonstrate. Useful to robots.</h2>
+        <p>In fixed 15-minute sessions, CIMI preserves most of bare-hand speed while collecting demonstrations that transfer to robot execution.</p>
+      </div>
+      <div class="efficiency-layout">
+        <figure class="media-card media-card--plot">
+          <img src="assets/collection-efficiency.webp" loading="lazy" alt="Successful demonstrations collected in 15 minutes for coin picking and bulb installation using CIMI, bare hands, and teleoperation." width="772" height="636">
+          <figcaption>Successful demonstrations collected by the same operator, including failures, resets, and object randomization.</figcaption>
+        </figure>
+        <div class="efficiency-copy">
+          <div class="big-stat"><strong>70%</strong><span>of bare-hand throughput on coin picking</span></div>
+          <div class="big-stat"><strong>71%</strong><span>of bare-hand throughput on bulb installation</span></div>
+          <div class="big-stat"><strong>2.3×</strong><span>teleoperation throughput on bulb installation</span></div>
+          <p>Teleoperation produced no successful coin demonstrations in the timed protocol; CIMI collected 113.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="abstract" aria-labelledby="abstract-title">
+      <div class="section-heading">
+        <p class="section-kicker">Paper</p>
+        <h2 id="abstract-title">Abstract</h2>
+      </div>
+      <div class="abstract-card">
+        <p>Robot-free human demonstrations offer a promising route to scaling dexterous manipulation data. The key challenge is to preserve the demonstrator’s natural dexterity while producing contact-grounded observations and actions that transfer to robot hands. We present <strong>Contact Imitation Interface (CIMI)</strong>, a framework with contact-grounded demonstration and learning interfaces. The demonstration interface combines shared contact geometry and fingertip RGB views with contact-alignment-first retargeting and reprojection of wider scene views. The learning interface introduces a hierarchical policy in which a contact-surface planner predicts relative contact-surface trajectories and a controller coordinates wrist and finger commands to improve contact alignment. CIMI combines contact-grounded observations, retargeting, and action representations, improving mean final-stage success by at least 50 percentage points over baseline policies across six hand–task pairs on LEAP and Wuji. Both the hardware designs and software will be publicly available.</p>
+      </div>
+      <div class="release-card">
+        <div>
+          <p class="section-kicker">Release</p>
+          <h3>Paper, hardware, and software</h3>
+          <p>Links and citation details will be added after the anonymous review period.</p>
+        </div>
+        <span class="status-badge">Coming soon</span>
+      </div>
+    </section>
+
+    <footer>
+      <span>CIMI · Contact Imitation Interface</span>
+      <span>Anonymous project page · 2026</span>
+    </footer>
   </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
