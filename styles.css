@@ -216,8 +216,26 @@ h1 {
   font-size: 11px;
   font-weight: 500;
 }
-.resource-pill--link { color: var(--blue); text-decoration: none; }
-.resource-pill--link:hover { border-color: var(--blue); }
+.resource-pill--primary {
+  gap: 9px;
+  padding: 10px 15px;
+  border-color: #2669cf;
+  background: var(--blue);
+  color: white;
+  font-size: 13px;
+  text-decoration: none;
+}
+.resource-pill--primary:hover,
+.resource-pill--primary:focus-visible { background: #246acb; border-color: #246acb; }
+.resource-pill--primary > span:first-child {
+  padding: 2px 4px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+.resource-pill--primary strong { font-weight: 700; }
 
 .impact-strip {
   display: grid;
@@ -478,6 +496,9 @@ h3 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -.005em; }
 .release-card h3 { font-size: 18px; }
 .release-card p:last-child { margin: 4px 0 0; color: #7a807b; font-size: 11px; }
 .status-badge { flex: none; padding: 5px 9px; border: 1px solid var(--line-dark); border-radius: 3px; color: #6c726d; font-size: 10px; }
+.status-badge--link { border-color: var(--blue); color: var(--blue); font-weight: 600; text-decoration: none; }
+.status-badge--link:hover,
+.status-badge--link:focus-visible { background: var(--blue); color: white; }
 
 footer {
   display: flex;
