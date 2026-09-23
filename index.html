@@ -32,11 +32,10 @@
     <p class="contents__label">Contents</p>
     <nav>
       <a class="is-active" href="#overview">Overview</a>
-      <a href="#interface">The interface</a>
-      <a href="#transfer">Contact transfer</a>
-      <a href="#learning">Learning</a>
-      <a href="#results">Evaluation</a>
-      <a href="#efficiency">Collection</a>
+      <a href="#video">Video</a>
+      <a href="#method">Method</a>
+      <a href="#demonstrations">Demos &amp; rollouts</a>
+      <a href="#observations">Observations</a>
       <a href="#abstract">Abstract</a>
     </nav>
     <p class="contents__note">Anonymous project page<br>ICRA 2027 submission</p>
@@ -44,196 +43,271 @@
 
   <main id="content">
     <header class="hero" id="top">
-      <p class="eyebrow">Contact-grounded robot learning</p>
       <h1><span class="accent">CIMI:</span> Contact Imitation Interface</h1>
       <p class="dek">Transferring Dexterous Skills by Showing How Contact Unfolds</p>
-      <p class="authors">Anonymous Authors</p>
+      <p class="authors">Anonymous authors</p>
       <p class="venue">Anonymous project page · under review</p>
 
       <div class="resource-row" aria-label="Project resources">
+        <a class="resource-pill resource-pill--primary" href="#video"><span aria-hidden="true">▶</span><strong>Watch video</strong></a>
         <a class="resource-pill resource-pill--primary" href="supplement.pdf" target="_blank" rel="noopener" type="application/pdf">
           <span aria-hidden="true">PDF</span>
-          <strong>Supplementary Material</strong>
+          <strong>Supplementary material</strong>
         </a>
       </div>
 
-      <div class="impact-strip" aria-label="Headline results">
-        <div><strong>80.8%</strong><span>mean final-stage success</span></div>
-        <div><strong>+50.0 pp</strong><span>over direct wrist–joint prediction</span></div>
-        <div><strong>2 hands</strong><span>LEAP and Wuji from shared demos</span></div>
-      </div>
+
     </header>
 
     <section class="section section--first" id="overview" aria-labelledby="overview-title">
       <div class="section-heading">
-        <p class="section-kicker">The idea</p>
-        <h2 id="overview-title">Make contact the common language.</h2>
-        <p>Human and robot hands differ in kinematics, but they can share the geometry, viewpoint, and motion of the surfaces that touch the object.</p>
+        <h2 id="overview-title">Overview</h2>
+        <p>CIMI transfers dexterous skills from human demonstrations to robot hands through shared contact surfaces and camera observations.</p>
       </div>
       <figure class="hero-figure">
-        <img src="assets/teaser.webp" alt="CIMI transfers contact surfaces and observations from a human demonstration to LEAP and Wuji robot hands for letter retrieval, bulb installation, and cube picking." width="2300" height="1911">
-        <figcaption>Shared contact surfaces and observations connect natural human demonstrations to different robot hands and contact-sensitive skills.</figcaption>
-      </figure>
-      <div class="idea-grid" aria-label="CIMI design principles">
-        <article>
-          <span class="card-index">01</span>
-          <h3>Shared contact geometry</h3>
-          <p>Human and robot fingertip modules use matching surfaces and camera placement.</p>
-        </article>
-        <article>
-          <span class="card-index">02</span>
-          <h3>Contact-aligned transfer</h3>
-          <p>Retargeting prioritizes the contact motion, then corrects the wider camera views.</p>
-        </article>
-        <article>
-          <span class="card-index">03</span>
-          <h3>Contact-surface actions</h3>
-          <p>A planner predicts how surfaces should move; a controller coordinates wrist and fingers.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="interface" aria-labelledby="interface-title">
-      <div class="section-heading">
-        <p class="section-kicker">Contact-grounded interface</p>
-        <h2 id="interface-title">Capture what matters at the fingertip.</h2>
-        <p>Matching contact surfaces and cameras preserve local interaction cues while wider context views keep the whole task visible.</p>
-      </div>
-      <figure class="media-card media-card--wide">
-        <img src="assets/pipeline.webp" loading="lazy" alt="CIMI pipeline from the human demonstration interface through a contact-surface planner and controller to robot execution." width="2790" height="989">
-        <figcaption>Contact connects demonstration and learning: capture trajectories and observations, construct robot demonstrations, plan surface motion, and realize it through coordinated control.</figcaption>
-      </figure>
-      <div class="stage-grid">
-        <article><span>D1</span><h3>Capture</h3><p>Three fingertip contact cameras, four context views, and tracking views form nine synchronized streams at 10 Hz.</p></article>
-        <article><span>D2</span><h3>Track</h3><p>Printed fiducials and visual pose estimation recover the demonstrated contact-surface trajectories.</p></article>
-        <article><span>D3</span><h3>Retarget</h3><p>Wrist and finger motion are optimized together to align surface position and orientation.</p></article>
-        <article><span>D4</span><h3>Reproject</h3><p>Contact views are retained; wider views are transformed to match the robot’s retargeted viewpoint.</p></article>
-      </div>
-    </section>
-
-    <section class="section" id="transfer" aria-labelledby="transfer-title">
-      <div class="section-heading">
-        <p class="section-kicker">Contact transfer</p>
-        <h2 id="transfer-title">Align contact first. Repair viewpoint second.</h2>
-        <p>Fixing the wrist to match a context camera can leave fingertips misaligned. CIMI frees the wrist to reproduce contact, then reprojects scene observations to the robot cameras.</p>
-      </div>
-      <div class="figure-pair">
-        <figure class="media-card">
-          <p class="media-label">Retargeting priority</p>
-          <img src="assets/retargeting.webp" loading="lazy" alt="Comparison of context-alignment-first and contact-alignment-first retargeting." width="1556" height="894">
-          <figcaption>Contact alignment reduces fingertip mismatch even when the context-camera pose must change.</figcaption>
-        </figure>
-        <figure class="media-card">
-          <p class="media-label">View conversion</p>
-          <img src="assets/reprojection.webp" loading="lazy" alt="Context views are reprojected and overlaid with the retargeted robot geometry." width="1658" height="748">
-          <figcaption>Offline reprojection and robot-geometry overlay construct training views from the execution perspective.</figcaption>
-        </figure>
-      </div>
-      <div class="metric-callout">
-        <p><strong>0.51 mm</strong><span>coin contact-corner error</span></p>
-        <p><strong>1.09 mm</strong><span>bulb contact-corner error</span></p>
-        <p><strong>90%</strong><span>bulb lighting success after alignment</span></p>
-      </div>
-    </section>
-
-    <section class="section" id="learning" aria-labelledby="learning-title">
-      <div class="section-heading">
-        <p class="section-kicker">Contact-grounded learning</p>
-        <h2 id="learning-title">Plan in contact space. Control the whole hand.</h2>
-        <p>The learning interface separates what the fingertips should do from how a particular robot should move to do it.</p>
-      </div>
-      <div class="learning-flow" aria-label="CIMI learning interface flow">
-        <article>
-          <span class="flow-tag">Visual + proprioceptive observations</span>
-          <h3>Contact-surface planner</h3>
-          <p>A flow-matching policy predicts a 16-step relative trajectory for every controlled contact surface.</p>
-        </article>
-        <span class="flow-arrow" aria-hidden="true">→</span>
-        <article>
-          <span class="flow-tag">Relative surface trajectories</span>
-          <h3>Contact-surface controller</h3>
-          <p>A reusable controller converts the plan into coordinated wrist poses and finger-joint targets.</p>
-        </article>
-        <span class="flow-arrow" aria-hidden="true">→</span>
-        <article>
-          <span class="flow-tag">8-step execution prefix</span>
-          <h3>Replan from contact</h3>
-          <p>The policy executes half the chunk, observes the latest interaction, and plans again.</p>
-        </article>
-      </div>
-      <aside class="plain-callout">
-        <span>Why it matters</span>
-        <p>Direct wrist-and-joint prediction asks one visual policy to learn both contact intent and robot kinematics. CIMI makes contact motion explicit and lets a dedicated controller handle embodiment-specific coordination.</p>
-      </aside>
-    </section>
-
-    <section class="section" id="results" aria-labelledby="results-title">
-      <div class="section-heading">
-        <p class="section-kicker">Real-world evaluation</p>
-        <h2 id="results-title">Contact grounding changes the outcome.</h2>
-        <p>Across six hand–task pairs and 20 rollouts per method, CIMI improves final-stage success on every task.</p>
-      </div>
-      <figure class="media-card media-card--wide">
-        <img src="assets/rollouts.webp" loading="lazy" alt="Successful CIMI rollouts for cube picking, coin picking, letter retrieval, and bulb installation, alongside baseline failures." width="1846" height="1294">
-        <figcaption>Successful rollouts reproduce the required contact sequence; context-only and direct-action baselines fail at alignment, wedging, engagement, or coordinated motion.</figcaption>
+        <img src="assets/teaser.svg" alt="CIMI transfers contact surfaces and observations from a human demonstration to LEAP and Wuji robot hands for letter retrieval, bulb installation, and cube picking." width="2300" height="1911">
+        <figcaption>The same demonstration interface provides training data for LEAP and Wuji hands.</figcaption>
       </figure>
 
-      <div class="result-layout">
-        <div class="comparison-card">
-          <div class="comparison-head"><h3>Mean final-stage success</h3><span>Six hand–task pairs</span></div>
-          <div class="bar-row">
-            <div class="bar-meta"><span>CIMI · ContactSurface + CTX+CC</span><strong>80.8%</strong></div>
-            <div class="bar-track"><span class="bar bar--ours" style="width:80.8%"></span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span>WristJoint + CTX+CC</span><strong>30.8%</strong></div>
-            <div class="bar-track"><span class="bar bar--baseline" style="width:30.8%"></span></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span>ContactSurface + CTX</span><strong>1.7%</strong></div>
-            <div class="bar-track"><span class="bar bar--context" style="width:1.7%"></span></div>
-          </div>
-        </div>
-        <div class="key-observations">
-          <article><span>O1</span><h3>Shared demos cross hands</h3><p>The same cube and coin recordings train separate policies for LEAP and Wuji.</p></article>
-          <article><span>O2</span><h3>Local vision establishes contact</h3><p>Adding contact cameras raises CIMI from 1.7% to 80.8% mean success.</p></article>
-          <article><span>O3</span><h3>Contact actions coordinate motion</h3><p>Surface planning adds 50.0 percentage points over direct wrist–joint prediction.</p></article>
-        </div>
-      </div>
-
-      <div class="task-results" aria-label="CIMI final-stage success by hand and task">
-        <div class="task-result"><span>LEAP</span><strong>Cube</strong><em>75%</em></div>
-        <div class="task-result"><span>LEAP</span><strong>Coin</strong><em>85%</em></div>
-        <div class="task-result"><span>LEAP</span><strong>Letter</strong><em>80%</em></div>
-        <div class="task-result"><span>LEAP</span><strong>Bulb</strong><em>90%</em></div>
-        <div class="task-result task-result--wuji"><span>Wuji</span><strong>Cube</strong><em>70%</em></div>
-        <div class="task-result task-result--wuji"><span>Wuji</span><strong>Coin</strong><em>85%</em></div>
-      </div>
     </section>
 
-    <section class="section" id="efficiency" aria-labelledby="efficiency-title">
+    <section class="section" id="video" aria-labelledby="video-title">
       <div class="section-heading">
-        <p class="section-kicker">Collection efficiency</p>
-        <h2 id="efficiency-title">Natural to demonstrate. Useful to robots.</h2>
-        <p>In fixed 15-minute sessions, CIMI preserves most of bare-hand speed while collecting demonstrations that transfer to robot execution.</p>
+        <h2 id="video-title">Supplementary video</h2>
+        <p>The video presents the interface, task demonstrations, and evaluation. Select play to start.</p>
       </div>
-      <div class="efficiency-layout">
-        <figure class="media-card media-card--plot">
-          <img src="assets/collection-efficiency.webp" loading="lazy" alt="Successful demonstrations collected in 15 minutes for coin picking and bulb installation using CIMI, bare hands, and teleoperation." width="772" height="636">
-          <figcaption>Successful demonstrations collected by the same operator, including failures, resets, and object randomization.</figcaption>
+      <figure class="media-card media-card--wide video-figure">
+        <video id="overview-video" controls playsinline preload="none" poster="assets/videos/overview.jpg" aria-label="CIMI supplementary video">
+          <source src="assets/videos/cimi-v33.mp4" type="video/mp4">
+          <track kind="captions" src="assets/videos/cimi-v33.en.vtt" srclang="en" label="English">
+          Your browser does not support embedded video. <a href="assets/videos/cimi-v33.mp4">Download the video</a>.
+        </video>
+        <figcaption>Narrated supplementary video · 2:59 · <a href="assets/videos/cimi-v33.mp4" download>Download MP4</a></figcaption>
+      </figure>
+    </section>
+
+
+    <section class="section" id="method" aria-labelledby="method-title">
+      <div class="section-heading">
+        <h2 id="method-title">Method</h2>
+        <p>CIMI collects human demonstrations, converts them into robot training data, and learns a policy that plans contact motion for robot execution.</p>
+      </div>
+      <figure class="media-card method-overview">
+        <img src="assets/pipeline.svg" loading="lazy" alt="Full CIMI pipeline: human demonstration collection, trajectory retargeting and view conversion, contact-surface policy training, and robot control." width="2790" height="989">
+        <figcaption>The full pipeline, from human recordings to robot execution.</figcaption>
+      </figure>
+      <p class="method-instruction" hidden>Select a stage to view its inputs, processing, and outputs.</p>
+      <div class="method-tabs" aria-label="Pipeline stages" hidden>
+        <button type="button" id="tab-collection" data-stage="collection"><span class="stage-number" aria-hidden="true">1</span><span>Collection</span></button>
+        <button type="button" id="tab-preprocessing" data-stage="preprocessing"><span class="stage-number" aria-hidden="true">2</span><span>Preprocessing</span></button>
+        <button type="button" id="tab-training" data-stage="training"><span class="stage-number" aria-hidden="true">3</span><span>Policy training</span></button>
+        <button type="button" id="tab-inference" data-stage="inference"><span class="stage-number" aria-hidden="true">4</span><span>Inference</span></button>
+      </div>
+      <div class="method-navigation" hidden>
+        <p id="method-progress" role="status" aria-live="polite" aria-atomic="true">Step 1 of 4 · Collection</p>
+        <div>
+          <button type="button" id="method-previous" disabled>Previous</button>
+          <button type="button" id="method-next">Next: Preprocessing →</button>
+        </div>
+      </div>
+      <div class="method-panel" id="stage-collection">
+        <h3>Human demonstration collection</h3>
+        <dl class="stage-io">
+          <div><dt>Input</dt><dd>A human performing the task with the calibrated demonstration interface.</dd></div>
+          <div><dt>Output</dt><dd>Synchronized contact, context, and tracking videos at 10 Hz.</dd></div>
+        </dl>
+        <p>Matching fingertip modules provide the human and robot with the same contact geometry and local camera views. Wrist and web-space cameras record the surrounding scene while the demonstrator performs the task.</p>
+        <p>The interface records nine synchronized streams at 10 Hz: three contact views, four context views, and two tracking views.</p>
+        <figure class="media-card collection-video">
+          <video controls playsinline muted preload="none" poster="assets/videos/human-collection.jpg" aria-label="Human demonstration collection with contact, context, and tracking camera views">
+            <source src="assets/videos/human-collection.mp4" type="video/mp4">
+            <a href="assets/videos/human-collection.mp4">Download human demonstration video</a>
+          </video>
+          <figcaption>Human demonstration and the recorded contact, context, and tracking views. Camera labels identify each view.</figcaption>
         </figure>
-        <div class="efficiency-copy">
-          <div class="big-stat"><strong>70%</strong><span>of bare-hand throughput on coin picking</span></div>
-          <div class="big-stat"><strong>71%</strong><span>of bare-hand throughput on bulb installation</span></div>
-          <div class="big-stat"><strong>2.3×</strong><span>teleoperation throughput on bulb installation</span></div>
-          <p>Teleoperation produced no successful coin demonstrations in the timed protocol; CIMI collected 113.</p>
+      </div>
+      <div class="method-panel" id="stage-preprocessing">
+        <h3>Contact-alignment-first retargeting and view conversion</h3>
+        <dl class="stage-io">
+          <div><dt>Input</dt><dd>Recorded videos, camera calibration, and the target robot’s kinematics and contact geometry.</dd></div>
+          <div><dt>Output</dt><dd>Robot training demonstrations: retained contact views, reprojected context views, and retargeted contact-surface and wrist–joint trajectories.</dd></div>
+        </dl>
+        <p>Fiducial tracking recovers contact-surface poses from the recordings. Human and robot hands have different kinematics, so holding the robot wrist at the human camera pose can prevent the fingertips from reaching the demonstrated contact positions.</p>
+        <div class="preprocessing-columns">
+          <article class="preprocessing-step">
+            <h4>Contact-surface retargeting</h4>
+            <p>CIMI optimizes wrist and finger motion together to match the demonstrated contact positions and orientations. Releasing the context-camera constraint lets the wrist move to improve contact alignment.</p>
+            <figure class="media-card alignment-animation">
+              <video controls playsinline muted loop preload="metadata" poster="assets/videos/contact-alignment.jpg" aria-label="Contact-alignment-first retargeting animation">
+                <source src="assets/videos/contact-alignment.mp4" type="video/mp4">
+                <a href="assets/videos/contact-alignment.mp4">Download video</a>
+              </video>
+              <figcaption>Contact positions align as the wrist and fingers move. The animation loops automatically; use the controls to pause.</figcaption>
+            </figure>
+          </article>
+          <article class="preprocessing-step">
+            <h4>Context-view reprojection</h4>
+            <p>The retargeted wrist motion changes the camera pose. CIMI reprojects the human context images to that viewpoint and overlays the robot geometry. Contact-camera views are retained.</p>
+            <figure class="media-card reprojection-figure">
+              <img src="assets/reprojection.svg" loading="lazy" alt="Human context images reprojected to the retargeted robot viewpoint, with robot geometry overlaid." width="1658" height="748">
+              <figcaption>The converted context views match the robot camera poses from retargeting.</figcaption>
+            </figure>
+          </article>
         </div>
+
+      </div>
+      <div class="method-panel" id="stage-training">
+        <h3>Policy architecture and training</h3>
+        <dl class="stage-io">
+          <div><dt>Input</dt><dd>Processed robot demonstrations for planner supervision; augmented wrist–joint trajectories and forward kinematics for controller supervision.</dd></div>
+          <div><dt>Output</dt><dd>A trained contact-surface planner and a separately trained controller for the robot hand.</dd></div>
+        </dl>
+        <p>The planner and controller are trained separately. The controller remains fixed during planner training.</p>
+        <article class="architecture-block">
+          <h4>Contact-surface planner</h4>
+          <p>A frozen C-RADIOv3-B encoder processes the selected RGB views. View-specific projections and a fusion network combine the visual features with inter-finger contact poses. A conditional flow network with six residual blocks predicts a 16-step contact-surface trajectory.</p>
+          <figure class="media-card">
+            <a href="supplement.pdf#page=4" target="_blank" rel="noopener" aria-label="Open planner architecture in the supplementary PDF, page 4">
+              <img src="assets/planner-architecture.svg" loading="lazy" alt="Planner architecture: frozen RGB encoder, view projections and fusion, relative contact-pose conditioning, and a six-block flow network with three Euler integration steps." width="1512" height="627">
+            </a>
+            <figcaption>Planner architecture (Figure S2). Conditional flow matching uses the retargeted trajectories as supervision. <a href="supplement.pdf#page=4" target="_blank" rel="noopener">Architecture and training settings, page 4</a>.</figcaption>
+          </figure>
+        </article>
+        <article class="architecture-block">
+          <h4>Contact-surface controller</h4>
+          <p>The controller constructs geometric features from contact-surface targets and current joints. An eight-block residual MLP predicts wrist and finger commands for all horizon steps in parallel. Training uses augmented motion trajectories, an initial action-regression phase, and a contact-corner loss with action regularization.</p>
+          <figure class="media-card">
+            <a href="supplement.pdf#page=6" target="_blank" rel="noopener" aria-label="Open controller architecture in the supplementary PDF, page 6">
+              <img src="assets/controller-architecture.svg" loading="lazy" alt="Controller architecture: forward kinematics and contact corners, geometric features, input projection, eight residual blocks, and wrist and joint command outputs." width="1512" height="363">
+            </a>
+            <figcaption>Controller architecture (Figure S4). A controller is reused across tasks with the same hand, finger set, contact geometry, and sampling configuration. <a href="supplement.pdf#page=5" target="_blank" rel="noopener">Controller training, pages 5–6</a>.</figcaption>
+          </figure>
+        </article>
+        <p><a href="supplement.pdf#page=3" target="_blank" rel="noopener">Full learning-interface details in the supplement</a>.</p>
+      </div>
+      <div class="method-panel" id="stage-inference">
+        <h3>Robot planning and control</h3>
+        <dl class="stage-io">
+          <div><dt>Input</dt><dd>Live robot camera views and measured joint state, together with the trained planner and controller.</dd></div>
+          <div><dt>Output</dt><dd>Wrist-pose and finger-joint commands. The robot executes eight predicted steps before observing and replanning.</dd></div>
+        </dl>
+        <p>At execution time, the planner receives the robot’s current camera views and proprioceptive state. It predicts contact-surface trajectories, and the controller converts them into coordinated wrist poses and finger-joint targets.</p>
+        <p>The robot executes the first eight steps of the 16-step prediction, receives new observations, and replans.</p>
       </div>
     </section>
 
-    <section class="section" id="abstract" aria-labelledby="abstract-title">
+    <section class="section" id="demonstrations" aria-labelledby="demonstrations-title">
       <div class="section-heading">
-        <p class="section-kicker">Paper</p>
+        <h2 id="demonstrations-title">Human demonstrations and robot policy rollouts</h2>
+        <p>Each video pairs a human demonstration with a learned LEAP policy rollout, including third-person, contact-camera, and context-camera views.</p>
+      </div>
+      <div class="demo-selector" role="group" aria-label="Choose human demonstration and policy rollout task" hidden>
+        <button type="button" data-demo="coin" aria-pressed="true">Coin picking</button>
+        <button type="button" data-demo="cube" aria-pressed="false">1 cm cube picking</button>
+        <button type="button" data-demo="letter" aria-pressed="false">Letter retrieval</button>
+        <button type="button" data-demo="bulb" aria-pressed="false">Bulb installation</button>
+      </div>
+      <figure class="media-card media-card--wide demo-panel" id="demo-coin">
+        <video controls playsinline muted preload="none" poster="assets/videos/coin.jpg" aria-label="Coin picking: human and LEAP camera comparison">
+          <source src="assets/videos/coin.mp4" type="video/mp4">
+          <a href="assets/videos/coin.mp4">Watch coin picking</a>
+        </video>
+        <figcaption><strong>Coin picking.</strong> Precise contact before pinching: the robot wedges under the coin, then pinches and lifts. Human demonstration and LEAP policy rollout both shown at 1×.</figcaption>
+      </figure>
+      <figure class="media-card media-card--wide demo-panel" id="demo-cube">
+        <video controls playsinline muted preload="none" poster="assets/videos/cube.jpg" aria-label="1 cm cube picking: human and LEAP camera comparison">
+          <source src="assets/videos/cube.mp4" type="video/mp4">
+          <a href="assets/videos/cube.mp4">Watch 1 cm cube picking</a>
+        </video>
+        <figcaption><strong>1 cm cube picking.</strong> Coordinate wrist and fingertips around a 1 cm target. Human demonstration and LEAP policy rollout both shown at 1×.</figcaption>
+      </figure>
+      <figure class="media-card media-card--wide demo-panel" id="demo-letter">
+        <video controls playsinline muted preload="none" poster="assets/videos/letter.jpg" aria-label="Letter retrieval: human and LEAP camera comparison">
+          <source src="assets/videos/letter.mp4" type="video/mp4">
+          <a href="assets/videos/letter.mp4">Watch letter retrieval</a>
+        </video>
+        <figcaption><strong>Letter retrieval.</strong> Sustain contact while engaging and opening a deformable flap. Human demonstration and LEAP policy rollout both shown at 1×.</figcaption>
+      </figure>
+      <figure class="media-card media-card--wide demo-panel" id="demo-bulb">
+        <video controls playsinline muted preload="none" poster="assets/videos/bulb.jpg" aria-label="Bulb installation: human and LEAP camera comparison">
+          <source src="assets/videos/bulb.mp4" type="video/mp4">
+          <a href="assets/videos/bulb.mp4">Watch bulb installation</a>
+        </video>
+        <figcaption><strong>Bulb installation.</strong> Coordinate repeated contact, turning, and release across three fingers. Human demonstration at 1×; LEAP policy rollout at 2.3×.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="observations" aria-labelledby="observations-title">
+      <div class="section-heading">
+        <h2 id="observations-title">Observations</h2>
+        <p>Four comparisons examine transfer across hands, contact-camera inputs, action representation, and contact alignment. Mean final-stage success is measured across six hand–task pairs, with 20 trials per pair for each method.</p>
+      </div>
+
+
+      <p class="observation-instruction" hidden>Select an observation to view its comparison.</p>
+      <div class="method-tabs observation-tabs" aria-label="Key observations" hidden>
+        <button type="button" id="observation-tab-shared-hands" data-observation="shared-hands"><span class="stage-number" aria-hidden="true">1</span><span>Across hands</span></button>
+        <button type="button" id="observation-tab-contact-cameras" data-observation="contact-cameras"><span class="stage-number" aria-hidden="true">2</span><span>Contact cameras</span></button>
+        <button type="button" id="observation-tab-contact-actions" data-observation="contact-actions"><span class="stage-number" aria-hidden="true">3</span><span>Contact-surface actions</span></button>
+        <button type="button" id="observation-tab-alignment-results" data-observation="alignment-results"><span class="stage-number" aria-hidden="true">4</span><span>Contact alignment</span></button>
+      </div>
+      <div class="method-navigation observation-navigation" hidden>
+        <p id="observation-progress" role="status" aria-live="polite" aria-atomic="true">Observation 1 of 4 · Across hands</p>
+        <div>
+          <button type="button" id="observation-previous" disabled>Previous</button>
+          <button type="button" id="observation-next">Next: Contact cameras →</button>
+        </div>
+      </div>
+      <div class="observations">
+        <article class="observation" id="observation-shared-hands" aria-labelledby="shared-hands-title">
+          <h3 id="shared-hands-title">Shared demonstrations across robot hands</h3>
+          <p>The same right-hand human demonstrations train policies for the right LEAP hand and left Wuji hand. Final-stage success is 75% and 70% for cube picking, and 85% for both hands on coin picking.</p>
+          <figure class="media-card ">
+        <video controls playsinline muted preload="none" poster="assets/videos/shared-hands.jpg" aria-label="Shared demonstrations across robot hands comparison">
+          <source src="assets/videos/shared-hands.mp4" type="video/mp4">
+          <a href="assets/videos/shared-hands.mp4">Download video</a>
+        </video>
+        <figcaption>Human, LEAP, and Wuji execution using shared demonstrations. Playback speeds are labeled in the video.</figcaption>
+      </figure>
+        </article>
+        <article class="observation" id="observation-contact-cameras" aria-labelledby="contact-cameras-title">
+          <h3 id="contact-cameras-title">Contact cameras</h3>
+          <p>With contact-surface actions held fixed, adding contact cameras raises mean final-stage success from 1.7% to 80.8%. The examples compare context-only inputs with context and contact inputs.</p>
+          <figure class="media-card ">
+        <video controls playsinline muted preload="none" poster="assets/videos/contact-cameras.jpg" aria-label="Contact cameras comparison">
+          <source src="assets/videos/contact-cameras.mp4" type="video/mp4">
+          <a href="assets/videos/contact-cameras.mp4">Download video</a>
+        </video>
+        <figcaption>Representative bulb and coin failures without contact cameras, alongside successful CIMI rollouts.</figcaption>
+      </figure>
+        </article>
+        <article class="observation" id="observation-contact-actions" aria-labelledby="contact-actions-title">
+          <h3 id="contact-actions-title">Contact-surface actions</h3>
+          <p>With the same visual inputs, predicting contact-surface trajectories raises mean final-stage success from 30.8% to 80.8% compared with direct wrist–joint prediction.</p>
+          <figure class="media-card ">
+        <video controls playsinline muted preload="none" poster="assets/videos/contact-actions.jpg" aria-label="Contact-surface actions comparison">
+          <source src="assets/videos/contact-actions.mp4" type="video/mp4">
+          <a href="assets/videos/contact-actions.mp4">Download video</a>
+        </video>
+        <figcaption>Representative cube and letter failures with direct wrist–joint prediction, alongside successful CIMI rollouts.</figcaption>
+      </figure>
+        </article>
+        <article class="observation" id="observation-alignment-results" aria-labelledby="alignment-results-title">
+          <h3 id="alignment-results-title">Contact alignment</h3>
+          <p>Releasing the context-camera constraint reduces mean coin contact-corner error from 14.67 to 0.51 mm. Coin lift success increases from 0% to 85%, and bulb lighting success from 0% to 90%. Both variants use corner matching.</p>
+          <figure class="media-card ">
+        <video controls playsinline muted preload="none" poster="assets/videos/alignment-results.jpg" aria-label="Contact alignment comparison">
+          <source src="assets/videos/alignment-results.mp4" type="video/mp4">
+          <a href="assets/videos/alignment-results.mp4">Download video</a>
+        </video>
+        <figcaption>Retargeting comparison and LEAP outcomes, with 20 trials per task and variant.</figcaption>
+      </figure>
+        </article>
+      </div>
+    </section>
+
+<section class="section" id="abstract" aria-labelledby="abstract-title">
+      <div class="section-heading">
         <h2 id="abstract-title">Abstract</h2>
       </div>
       <div class="abstract-card">
@@ -241,11 +315,10 @@
       </div>
       <div class="release-card">
         <div>
-          <p class="section-kicker">Available now</p>
-          <h3>Supplementary Material</h3>
-          <p>Hardware and fabrication details, implementation settings, and policy camera inputs. The paper, code, and citation will follow after review.</p>
+          <h3>Supplementary material</h3>
+          <p>The PDF provides hardware and fabrication details, implementation settings, and policy camera inputs. The paper, code, and citation will follow after review.</p>
         </div>
-        <a class="status-badge status-badge--link" href="supplement.pdf" target="_blank" rel="noopener" type="application/pdf">Open supplement ↗</a>
+        <a class="status-badge status-badge--link" href="supplement.pdf" target="_blank" rel="noopener" type="application/pdf">Open supplementary PDF</a>
       </div>
     </section>
 
