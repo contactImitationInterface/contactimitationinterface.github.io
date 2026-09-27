@@ -216,3 +216,17 @@ h1 { font-weight: 700; }
 .observation-instruction { margin-top: 24px; font-size: 15px; color: var(--muted); }
 .observation[role="tabpanel"] { margin-top: 0; padding-top: 10px; border-top: 0; }
 .observation-navigation > div { flex-wrap: wrap; }
+
+/* Task choices share the method and observation button treatment. */
+.demo-selector.method-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.demo-selector.method-tabs button[aria-pressed="true"] { background: var(--blue); color: white; border-color: var(--blue); box-shadow: 0 2px 0 #246acb; }
+@media (max-width: 640px) { .demo-selector.method-tabs { grid-template-columns: 1fr 1fr; } }
+
+.authors { font-size: 19px; font-weight: 400; line-height: 1.9; max-width: 880px; margin-inline: auto; }
+.authors > span { display: inline-block; white-space: nowrap; }
+.authors a { text-decoration: none; }
+.authors a:hover { text-decoration: underline; }
+.authors sup, .affiliations sup { font-size: .7em; margin-left: 2px; }
+.affiliations { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; margin-top: 12px; font-size: 16px; }
+
+.author-notes { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; margin: 8px 0 0; font-size: 14px; }

@@ -21,7 +21,7 @@ The supplementary video is the final `CIMI_ICRA_Supplementary_v33_Josh.mp4` from
 
 ## Page structure
 
-- Overview and full supplementary video.
+- Full supplementary video directly below the title, with a supplementary PDF link.
 - Method: Collection, Preprocessing, Policy training, and Inference, with numbered buttons and Previous/Next navigation. Each stage starts with its inputs and outputs.
 - Human demonstrations paired with robot policy rollouts for four tasks.
 - Observations: four selectable inline comparisons, using the same navigation as Method.

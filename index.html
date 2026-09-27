@@ -16,10 +16,11 @@
   <meta name="twitter:title" content="CIMI — Contact Imitation Interface">
   <meta name="twitter:description" content="Transferring dexterous skills by showing how contact unfolds.">
   <meta name="twitter:image" content="https://contactimitationinterface.github.io/assets/teaser.webp">
+  <link rel="canonical" href="https://contactimitationinterface.github.io/">
   <title>CIMI — Contact Imitation Interface</title>
   <link rel="preload" href="assets/fonts/amarna-400.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="assets/fonts/amarna-700.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260923-2">
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
@@ -31,8 +32,7 @@
     </a>
     <p class="contents__label">Contents</p>
     <nav>
-      <a class="is-active" href="#overview">Overview</a>
-      <a href="#video">Video</a>
+      <a class="is-active" href="#video">Video</a>
       <a href="#method">Method</a>
       <a href="#demonstrations">Demos &amp; rollouts</a>
       <a href="#observations">Observations</a>
@@ -45,11 +45,7 @@
     <header class="hero" id="top">
       <h1><span class="accent">CIMI:</span> Contact Imitation Interface</h1>
       <p class="dek">Transferring Dexterous Skills by Showing How Contact Unfolds</p>
-      <p class="authors">Anonymous authors</p>
-      <p class="venue">Anonymous project page · under review</p>
-
       <div class="resource-row" aria-label="Project resources">
-        <a class="resource-pill resource-pill--primary" href="#video"><span aria-hidden="true">▶</span><strong>Watch video</strong></a>
         <a class="resource-pill resource-pill--primary" href="supplement.pdf" target="_blank" rel="noopener" type="application/pdf">
           <span aria-hidden="true">PDF</span>
           <strong>Supplementary material</strong>
@@ -59,25 +55,12 @@
 
     </header>
 
-    <section class="section section--first" id="overview" aria-labelledby="overview-title">
+<section class="section section--first" id="video" aria-labelledby="video-title">
       <div class="section-heading">
-        <h2 id="overview-title">Overview</h2>
-        <p>CIMI transfers dexterous skills from human demonstrations to robot hands through shared contact surfaces and camera observations.</p>
-      </div>
-      <figure class="hero-figure">
-        <img src="assets/teaser.svg" alt="CIMI transfers contact surfaces and observations from a human demonstration to LEAP and Wuji robot hands for letter retrieval, bulb installation, and cube picking." width="2300" height="1911">
-        <figcaption>The same demonstration interface provides training data for LEAP and Wuji hands.</figcaption>
-      </figure>
-
-    </section>
-
-    <section class="section" id="video" aria-labelledby="video-title">
-      <div class="section-heading">
-        <h2 id="video-title">Supplementary video</h2>
-        <p>The video presents the interface, task demonstrations, and evaluation. Select play to start.</p>
+        <h2 id="video-title">Video</h2>
       </div>
       <figure class="media-card media-card--wide video-figure">
-        <video id="overview-video" controls playsinline preload="none" poster="assets/videos/overview.jpg" aria-label="CIMI supplementary video">
+        <video id="overview-video" controls playsinline preload="none" poster="assets/videos/overview.jpg" aria-label="CIMI video">
           <source src="assets/videos/cimi-v33.mp4" type="video/mp4">
           <track kind="captions" src="assets/videos/cimi-v33.en.vtt" srclang="en" label="English">
           Your browser does not support embedded video. <a href="assets/videos/cimi-v33.mp4">Download the video</a>.
@@ -201,11 +184,11 @@
         <h2 id="demonstrations-title">Human demonstrations and robot policy rollouts</h2>
         <p>Each video pairs a human demonstration with a learned LEAP policy rollout, including third-person, contact-camera, and context-camera views.</p>
       </div>
-      <div class="demo-selector" role="group" aria-label="Choose human demonstration and policy rollout task" hidden>
-        <button type="button" data-demo="coin" aria-pressed="true">Coin picking</button>
-        <button type="button" data-demo="cube" aria-pressed="false">1 cm cube picking</button>
-        <button type="button" data-demo="letter" aria-pressed="false">Letter retrieval</button>
-        <button type="button" data-demo="bulb" aria-pressed="false">Bulb installation</button>
+      <div class="demo-selector method-tabs" role="group" aria-label="Choose human demonstration and policy rollout task" hidden>
+        <button type="button" data-demo="coin" aria-pressed="true"><span class="stage-number" aria-hidden="true">1</span><span>Coin picking</span></button>
+        <button type="button" data-demo="cube" aria-pressed="false"><span class="stage-number" aria-hidden="true">2</span><span>1 cm cube picking</span></button>
+        <button type="button" data-demo="letter" aria-pressed="false"><span class="stage-number" aria-hidden="true">3</span><span>Letter retrieval</span></button>
+        <button type="button" data-demo="bulb" aria-pressed="false"><span class="stage-number" aria-hidden="true">4</span><span>Bulb installation</span></button>
       </div>
       <figure class="media-card media-card--wide demo-panel" id="demo-coin">
         <video controls playsinline muted preload="none" poster="assets/videos/coin.jpg" aria-label="Coin picking: human and LEAP camera comparison">
@@ -233,7 +216,7 @@
           <source src="assets/videos/bulb.mp4" type="video/mp4">
           <a href="assets/videos/bulb.mp4">Watch bulb installation</a>
         </video>
-        <figcaption><strong>Bulb installation.</strong> Coordinate repeated contact, turning, and release across three fingers. Human demonstration at 1×; LEAP policy rollout at 2.3×.</figcaption>
+        <figcaption><strong>Bulb installation.</strong> Coordinate repeated contact, turning, and release across three fingers.</figcaption>
       </figure>
     </section>
 
@@ -316,7 +299,7 @@
       <div class="release-card">
         <div>
           <h3>Supplementary material</h3>
-          <p>The PDF provides hardware and fabrication details, implementation settings, and policy camera inputs. The paper, code, and citation will follow after review.</p>
+          <p>The PDF provides hardware and fabrication details, implementation settings, and policy camera inputs. </p>
         </div>
         <a class="status-badge status-badge--link" href="supplement.pdf" target="_blank" rel="noopener" type="application/pdf">Open supplementary PDF</a>
       </div>
